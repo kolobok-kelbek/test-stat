@@ -1,0 +1,15 @@
+controllers:
+  resource: ../src/Controller/OpenApi
+  type: attribute
+  prefix: '/api'
+  trailing_slash_on_root: false
+
+app.swagger_ui:
+  path: /api/doc
+  methods: GET
+  defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+app.swagger:
+  path: /api/doc.json
+  methods: GET
+  defaults: { _controller: nelmio_api_doc.controller.swagger }

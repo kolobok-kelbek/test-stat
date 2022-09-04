@@ -1,0 +1,26 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\:
+    resource: '../src/'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/Entity/'
+      - '../src/Kernel.php'
+
+  App\Controller\OpenApi\:
+    resource: '../src/Controller/OpenApi'
+    exclude:
+      - '../src/Controller/OpenApi/**/{Model}'
+    tags: [ 'controller.service_arguments' ]
+
+  App\Storage\Storage:
+    class: App\Storage\RedisStorage
+    arguments:
+      - '%env(resolve:REDIS_HOST)%'
+      - '%env(resolve:REDIS_PORT)%'
+      - 2.5
